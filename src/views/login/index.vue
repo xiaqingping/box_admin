@@ -18,18 +18,24 @@
           placeholder="Username"
           type="text"
           tabindex="1"
+          @blur="paxNameBlur(loginForm.username, 'name')"
         />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
           ref="password"
-          v-model="loginForm.password"
+          v-model.trim="loginForm.password"
           type="password"
           placeholder="Password"
           tabindex="2"
+          @blur="paxNameBlur(loginForm.password, 'password')"
         />
       </el-form-item>
-      <el-button type="primary" style="width:100%;margin-bottom:30px;">Login</el-button>
+      <el-button
+        type="primary"
+        style="width:100%;margin-bottom:30px;"
+        @click="submitForm('loginForm')"
+      >Login</el-button>
     </el-form>
   </div>
 </template>
@@ -41,26 +47,42 @@ export default {
   data() {
     return {
       loginForm: {
-        username: 'ccc',
-        password: 'ccc'
+        username: '',
+        password: ''
       },
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
+          {
+            min: 3,
+            max: 12,
+            message: '长度在 3 到 12 个字符',
+            trigger: 'blur'
+          }
         ],
         password: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 5, max: 11, message: '长度在 3 到 11 个字符', trigger: 'blur' }
         ]
       }
     }
   },
-  watch: {},
   created() {},
-  mounted() {},
-  destroyed() {},
-  methods: {}
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    paxNameBlur(value, name) {
+      this.loginForm[name] = value.trim()
+    }
+  }
 }
 </script>
 
