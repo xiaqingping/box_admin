@@ -15,7 +15,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
+          placeholder="用户名"
           type="text"
           tabindex="1"
           @blur="paxNameBlur(loginForm.username, 'name')"
@@ -26,7 +26,7 @@
           ref="password"
           v-model.trim="loginForm.password"
           type="password"
-          placeholder="Password"
+          placeholder="密码"
           tabindex="2"
           @blur="paxNameBlur(loginForm.password, 'password')"
         />
@@ -34,8 +34,9 @@
       <el-button
         type="primary"
         style="width:100%;margin-bottom:30px;"
+        :loading="loading"
         @click="submitForm('loginForm')"
-      >Login</el-button>
+      >登录</el-button>
     </el-form>
   </div>
 </template>
@@ -46,9 +47,10 @@ export default {
   components: {},
   data() {
     return {
+      loading: false,
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
       },
       rules: {
         username: [
@@ -72,7 +74,24 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('submit!')
+          this.loading = true
+          const { username, password } = this.loginForm
+          const data = {
+            username,
+            password
+          }
+          this.$store
+            .dispatch({
+              type: 'user/login',
+              payload: data
+            })
+            .then(() => {
+              this.$router.push({ path: '/' })
+              this.loading = false
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false

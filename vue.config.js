@@ -8,7 +8,7 @@ function resolve(dir) {
 
 const name = defaultSettings.title || 'vue Element Admin' // page title
 
-const port = process.env.port || process.env.npm_config_port || 9527 // dev port
+const port = process.env.port || process.env.npm_config_port || 3000 // dev port
 
 module.exports = {
   publicPath: '/',
@@ -18,10 +18,19 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: port,
-    open: true,
+    // open: true,
     overlay: {
       warnings: false,
       errors: true
+    },
+    proxy: {
+      '/apis': {
+        target: 'http://192.168.1.4:8000/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/apis': 'http://192.168.1.4:8000/'
+        }
+      }
     }
   },
   configureWebpack: {
