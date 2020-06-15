@@ -3,7 +3,7 @@
     <el-container>
       <el-aside width="200px">
         <div class="headerLogo">
-          小盒子
+          LOGO
         </div>
         <Menu />
       </el-aside>
