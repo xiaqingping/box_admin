@@ -4,7 +4,7 @@ import { login } from '@/api/user'
 // 这三个函数就是： 与 token 相关的操作
 import { getToken, setToken } from '@/utils/auth'
 
-import router, { resetRouter } from '@/router'
+// import router, { resetRouter } from '@/router'
 
 // user模块自己的状态
 const state = {
@@ -14,24 +14,67 @@ const state = {
   introduction: '',
   roles: [
     {
-      roleId: '1',
-      rolesName: 'management',
-      rolesText: '用户管理'
-    },
-    {
-      roleId: '2',
-      rolesName: 'configuration',
-      rolesText: '路由配置'
-    },
-    {
-      roleId: '3',
-      rolesName: 'department',
-      rolesText: '部门配置'
-    },
-    {
-      roleId: '4',
-      rolesName: 'role',
-      rolesText: '角色管理'
+      'id': 2,
+      'parentId': 0,
+      'name': '系统管理',
+      'children': [
+        {
+          'id': 3,
+          'parentId': 2,
+          'children': [
+            {
+              'id': 5,
+              'parentId': 3,
+              'children': [
+              ],
+              'name': '用户管理'
+            },
+            {
+              'id': 6,
+              'parentId': 3,
+              'children': [
+              ],
+              'name': '角色管理'
+            },
+            {
+              'id': 7,
+              'parentId': 3,
+              'children': [
+              ],
+              'name': '部门管理'
+            },
+            {
+              'id': 8,
+              'parentId': 3,
+              'children': [
+              ],
+              'name': '资源管理'
+            }
+          ],
+          'name': '权限管理'
+        },
+        {
+          'id': 4,
+          'parentId': 2,
+          'children': [
+          ],
+          'name': '系统配置'
+        },
+        {
+          'id': 9,
+          'parentId': 2,
+          'children': [
+          ],
+          'name': '微服务名称配置'
+        },
+        {
+          'id': 10,
+          'parentId': 2,
+          'children': [
+          ],
+          'name': '第三方系统接入配置'
+        }
+      ]
     }
   ]
 }

@@ -3,13 +3,12 @@
     <el-container>
       <el-aside width="200px">
         <div class="headerLogo">
-          <i class="el-icon-loading" />
           小盒子
         </div>
         <Menu />
       </el-aside>
       <el-container>
-        <el-header>人类迷惑行为</el-header>
+        <el-header>header</el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
